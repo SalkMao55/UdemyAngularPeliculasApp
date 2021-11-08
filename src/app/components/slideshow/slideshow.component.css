@@ -1,0 +1,17 @@
+.swiper {
+    /* base measure: 16px */
+    height: 18.75em;
+    width: 100%;
+  }
+
+  .swiper-button-prev,.swiper-button-next {
+      color: white;
+  }
+  
+  .movie-description {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    padding: 0.1875rem, 1.875rem;
+    position: absolute;
+    width: 100%;
+  }
