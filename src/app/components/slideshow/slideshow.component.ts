@@ -10,10 +10,13 @@ import { Movie } from '../../interfaces/cartelera-response';
 export class SlideshowComponent implements OnInit, AfterViewInit {
   // Input to get data property "movies" from component "pages/home" 
   @Input () movies?: Movie[];
+  // Swiper
+  public swiper?: Swiper;
+
   constructor() { }
 
   ngAfterViewInit(): void {
-    const swiper = new Swiper('.swiper', {
+    this.swiper = new Swiper('.swiper', {
       // Optional parameters
       // direction: 'vertical',
       loop: true,
@@ -35,11 +38,19 @@ export class SlideshowComponent implements OnInit, AfterViewInit {
       },
     });
     // Otra coas
-    // throw new Error('Method not implemented.');
   }
 
   ngOnInit(): void {
-    console.log(this.movies);
+    
   }
+
+  onSlideNext() {
+    this.swiper?.slideNext();
+  }
+
+  onSlidePrev() {
+    this.swiper?.slidePrev();
+  }
+
 
 }
