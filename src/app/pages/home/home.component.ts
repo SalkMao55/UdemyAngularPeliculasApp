@@ -22,9 +22,10 @@ export class HomeComponent implements OnInit {
     const pos = ( document.documentElement.scrollTop || document.body.scrollTop ) + (max/3); // Get current Scroll value
     
     if ( pos >= max) {
+      if (this.peliculasService.cargando) { return; }
       // TODO: llamar el servicio
-      this.peliculasService.getCartelera().subscribe( resp => {
-        this.movies.push(...resp.results); // Add every result to Array of movies
+      this.peliculasService.getCartelera().subscribe( movies => {
+        this.movies.push(...movies); // Add every result to Array of movies
       } );
     }
   }
@@ -33,10 +34,10 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.peliculasService.getCartelera().subscribe(resp => {
+    this.peliculasService.getCartelera().subscribe(movies => {
       // console.log(resp.results);
-      this.movies = resp.results;
-      this.moviesSlideshow = resp.results;
+      this.movies = movies;
+      this.moviesSlideshow = movies;
     });
   }
 
