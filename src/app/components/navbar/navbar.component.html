@@ -7,10 +7,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+        <div class="d-flex">
+          <input  #textBuscar
+                  (keyup.enter)="buscarPelicula( textBuscar.value)" 
+                  class="form-control me-2" 
+                  type="search" placeholder="Search" 
+                  aria-label="Search">
+          <button (click)="buscarPelicula( textBuscar.value)"
+                  class="btn btn-outline-success" type="submit">Buscar</button>
+        </div>
       </div>
     </div>
   </nav>
