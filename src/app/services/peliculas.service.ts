@@ -42,4 +42,15 @@ export class PeliculasService {
     );
   }
 
+  //Method to get films with the word writed on NavBar Input
+  buscarPeliculas(texto:string):Observable<Movie[]>{
+    // We don't need the Page Number, we will change its value to 1
+    const params = {...this.params, page:'1', query:texto};
+    return this.http.get<CarteleraResponse>(`${this.baseUrl}/search/movie`,{
+      params // Rule of ecmascript 6, we can use the same variable like this propertie.
+    }).pipe(
+      map( resp => resp.results ) // This return => (property) CarteleraResponse.results: Movie[]
+    );
+  } 
+
 }
