@@ -26,6 +26,11 @@ export class PeliculasService {
       region: 'MX'
     }
   }
+
+  // Method to reset "carteleraPage"
+  resetCargeleraPage(){
+    this.carteleraPage = 1;
+  }
   
 
   getCartelera():Observable<Movie[]>{
