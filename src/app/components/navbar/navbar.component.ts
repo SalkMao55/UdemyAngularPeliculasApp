@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor( private router: Router ) { }
 
   ngOnInit(): void {
+  }
+
+  buscarPelicula( texto: string) {
+    // Erase spaces from variable "texto"
+    texto = texto.trim();
+    if (texto.length == 0) {
+      return; // Do nothing without words
+    }
+    this.router.navigate(['/buscar',texto]);
+    console.log(texto);
   }
 
 }

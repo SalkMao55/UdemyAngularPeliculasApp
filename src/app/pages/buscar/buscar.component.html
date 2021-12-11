@@ -1,1 +1,8 @@
-<p>buscar works!</p>
+<h1>Buscar Películas <small>{{ text_busqueda }}</small></h1>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-peliculas-poster-grid *ngIf="smovies.length > 0" [movies]="smovies" ></app-peliculas-poster-grid>
+    </div>
+</div>
