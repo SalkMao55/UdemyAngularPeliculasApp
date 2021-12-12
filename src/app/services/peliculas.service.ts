@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
+import { MovieResponse } from '../interfaces/movie-response';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,13 @@ export class PeliculasService {
     }).pipe(
       map( resp => resp.results ) // This return => (property) CarteleraResponse.results: Movie[]
     );
-  } 
+  }
+  
+  // Method to get information realted to one Movie with the ID indicated.
+  getPeliculaDetalle( id: string ){
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/${id}`,{
+      params: this.params
+    });
+  }
 
 }
