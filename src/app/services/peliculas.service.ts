@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 import { MovieResponse } from '../interfaces/movie-response';
-import { CreditsResponse } from '../interfaces/credits-response';
+import { Cast, CreditsResponse } from '../interfaces/credits-response';
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +71,7 @@ export class PeliculasService {
   }
 
   // Method to get information related to Credits Movie with the ID indicated.
-  getCast(id: string){
+  getCast(id: string):Observable<Cast[]> {
     return this.http.get<CreditsResponse>(`${this.baseUrl}/movie/${id}/credits`,{params:this.params})
           .pipe(
             map( resp => resp.cast), // This return => (property) CreditsResponse.cast: Cast[]

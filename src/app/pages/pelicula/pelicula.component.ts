@@ -23,7 +23,7 @@ export class PeliculaComponent implements OnInit {
   //Source: https://stackoverflow.com/questions/67351411/what-s-the-difference-between-definite-assignment-assertion-and-ambient-declarat
   
   //Propertie use to show Cast Movie information on Template "pelicula.component.html"
-  public declare cast: Cast[];
+  public cast: Cast[] = []; //Array without values, for use cast.length in  "pelicula.component.html"
 
   constructor( private activatedRoute: ActivatedRoute,
                private peliculasService: PeliculasService,
@@ -43,7 +43,7 @@ export class PeliculaComponent implements OnInit {
     // Get Cast Movie information from "pelicula.service.ts"
     this.peliculasService.getCast(id).subscribe( cast => {
       console.log(cast);
-      this.cast = cast;
+      this.cast = cast.filter(actor => actor.profile_path !== null);// Filter actors
     });
 
   }
