@@ -7,6 +7,7 @@ import { StarRatingComponent } from 'ng-starrating';
 // This gives all the User Location Information
 import { Location } from '@angular/common';
 import { Cast } from 'src/app/interfaces/credits-response';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-pelicula',
@@ -31,20 +32,37 @@ export class PeliculaComponent implements OnInit {
                private router: Router ) { }
 
   ngOnInit(): void {
-    const  {id}  = this.activatedRoute.snapshot.params;
-    this.peliculasService.getPeliculaDetalle(id).subscribe( movie => {
-      //console.log(movie);
-      // Get Movie information from "pelicula.service.ts"
-      if (!movie) {
+    const  {id}  = this.activatedRoute.snapshot.params;//Get params that we send used route
+    
+    // NEW CODE GETS INFORMATION FROM SERVICE
+    combineLatest([
+
+      this.peliculasService.getPeliculaDetalle(id),
+      this.peliculasService.getCast(id)
+
+    ]).subscribe( ( [pelicula, cast] ) => {
+      //First validation
+      if (!pelicula) {
         this.router.navigate(['/home']);
       }
-      this.pelicula = movie;
+      this.pelicula = pelicula;
+      //Get Cast Information
+      this.cast = cast;
     });
-    // Get Cast Movie information from "pelicula.service.ts"
-    this.peliculasService.getCast(id).subscribe( cast => {
-      console.log(cast);
-      this.cast = cast.filter(actor => actor.profile_path !== null);// Filter actors
-    });
+
+    // OLD CODE GETS INFORMATION FROM SERVICE
+    // this.peliculasService.getPeliculaDetalle(id).subscribe( movie => {
+    //   // Get Movie information from "pelicula.service.ts"
+    //   if (!movie) {
+    //     this.router.navigate(['/home']);
+    //   }
+    //   this.pelicula = movie;
+    // });
+    // // Get Cast Movie information from "pelicula.service.ts"
+    // this.peliculasService.getCast(id).subscribe( cast => {
+    //   console.log(cast);
+    //   this.cast = cast.filter(actor => actor.profile_path !== null);// Filter actors
+    // });
 
   }
   
